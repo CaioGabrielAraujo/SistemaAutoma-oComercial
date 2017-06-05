@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class = "container" style="padding:10px;display:table;">
+<a class="btn btn-primary" href="{% url 'product:cadastrarProduto' %}">Adicionar Produto</a>
+<table class="table table-hover" style="margin:5px;">
+
+  <tr>
+
+    <th>Nome</th>
+    <th>Quantidade</th>
+    <th>Preço</th>
+
+  </tr>
+  {% for product in all_products %}
+  <tr>
+
+    <td>{{ product.name}}</td>
+    <td>{{ product.quantidade}}</td>
+    <td>{{product.preco  }}</td>
+
+  </tr>
+
+  {% endfor %}
+</table>
+
+</div>
+{% endblock %}

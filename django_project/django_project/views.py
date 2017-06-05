@@ -2,5 +2,5 @@ from django.shortcuts import render
 
 
 def index(request):
-    template_name = 'users/base.html'
+    template_name = 'index.html'
     return render(request, template_name)

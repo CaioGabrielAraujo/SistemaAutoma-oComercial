@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 
-
+@login_required
 def dashboard(request):
     return render(request, 'users/dashboard.html')
 
@@ -25,6 +25,10 @@ def show_login(request):
         else:
             return render(request, "users/login.html", context)
 
+@login_required
+def logout_view(request, *args, **kwargs):
+
+    return logout(request, *args, **kwargs)
 
 def make_login(request):
     form = request.POST
@@ -35,8 +39,6 @@ def make_login(request):
     is_logged = False
 
     if user is not None:
-        logger = logging.getLogger(__name__)
-        logger.info(user.__str__() + ' User is logged')
         login(request, user)
         message = "Logged"
 

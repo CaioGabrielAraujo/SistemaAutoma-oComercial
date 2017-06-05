@@ -1,23 +1,23 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html >
-<head>
-  <meta charset="UTF-8">
-  <title>Login/Sign-In</title>
+{% extends "base.html"%}
 
+{% load staticfiles %}
+
+
+{% block head %}
+<title>Login/Sign-In</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
   <link href="{% static 'users/css/style.css' %}" rel="stylesheet">
+{% endblock %}
 
 
 
-</head>
 
-<body>
+{% block body%}
   <div class="logmod">
   <div class="logmod__wrapper">
-    <span class="logmod__close">Close</span>
+
     <div class="logmod__container">
       <ul class="logmod__tabs">
         <li data-tabtar="lgm-2"><a href="#">Login</a></li>
@@ -79,46 +79,28 @@
           <span class="logmod__heading-subtitle">Enter your email and password <strong>to sign in</strong></span>
         </div>
         <div class="logmod__form">
-          <form accept-charset="utf-8" action="#" class="simform">
+          <form class="form-signin" method="POST" action="{% url "users:login"%}">
+            {% csrf_token %}
             <div class="sminputs">
               <div class="input full">
                 <label class="string optional" for="user-name">Email*</label>
-                <input class="string optional" maxlength="255" id="user-email" placeholder="Email" type="email" size="50" />
+                <input class="string optional" name="username" maxlength="255" id="user-email" placeholder="Email" type="email" size="50" />
               </div>
             </div>
             <div class="sminputs">
               <div class="input full">
                 <label class="string optional" for="user-pw">Password *</label>
-                <input class="string optional" maxlength="255" id="user-pw" placeholder="Password" type="password" size="50" />
+                <input class="string optional" name="password" maxlength="255" id="user-pw" placeholder="Password" type="password" size="50" />
                 						<span class="hide-password">Show</span>
               </div>
             </div>
             <div class="simform__actions">
-              <input class="sumbit" name="commit" type="sumbit" value="Log In" />
-              <span class="simform__actions-sidetext"><a class="special" role="link" href="#">Forgot your password?<br>Click here</a></span>
+              <button class="btn btn-info btn-primary btn-block" type="submit">Entrar</button>
+              <span class="simform__actions-sidetext"><a class="special" role="link" href="#">Forgot your password?<br></a></span>
             </div>
           </form>
         </div>
-        <div class="logmod__alter">
-          <div class="logmod__alter-container">
-            <a href="#" class="connect facebook">
-              <div class="connect__icon">
-                <i class="fa fa-facebook"></i>
-              </div>
-              <div class="connect__context">
-                <span>Sign in with <strong>Facebook</strong></span>
-              </div>
-            </a>
-            <a href="#" class="connect googleplus">
-              <div class="connect__icon">
-                <i class="fa fa-google-plus"></i>
-              </div>
-              <div class="connect__context">
-                <span>Sign in with <strong>Google+</strong></span>
-              </div>
-            </a>
-          </div>
-        </div>
+
           </div>
       </div>
     </div>
@@ -128,5 +110,5 @@
 
     <script src="{%static 'users/js/index.js' %}"></script>
 
-</body>
+{% endblock %}
 </html>
