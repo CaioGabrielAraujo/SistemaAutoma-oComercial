@@ -19,4 +19,12 @@ class Product(models.Model):
     categories = models.ManyToManyField(Category, blank=True)
 
     def __str__(self):
-        return self.nome    
+        return self.nome
+
+
+class Venda(models.Model):
+    descricao = models.CharField(max_length=30, unique=True)
+    produtos = models.ManyToManyField(Product, blank=True)
+
+    def __str__(self):
+        return self.descricao

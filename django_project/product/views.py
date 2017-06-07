@@ -4,8 +4,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
 
-from product.forms import Create_Category_Form, Create_Product_Form
-from .models import Product, Category
+from product.forms import Create_Category_Form, Create_Product_Form, Create_Venda_Form
+from .models import Product, Category, Venda
 from django.db import models
 
 
@@ -52,6 +52,19 @@ def edit_product(request,product_id):
     else:
         form = Create_Product_Form(instance=product)
         return render(request, 'edit_products.html', {'form': form})
+
+def sell_product(request):
+    if request.method == "POST":
+        form = Create_Venda_Form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('product:sellproduct'))
+        return render(request, 'vendaproduto.html', {'form': form, 'all_Venda': Venda.objects.all()})
+
+    else:
+        form = Create_Venda_Form()
+        return render(request, 'vendaproduto.html', {'form': form, 'all_Venda': Venda.objects.all()})
+
 
 @staff_member_required
 def list_products(request):
