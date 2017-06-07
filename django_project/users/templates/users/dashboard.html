@@ -13,4 +13,13 @@
 
 
 {% block body %}
+
+<header class="jumbotron hero-spacer" style="padding:150px;">
+    <h2>Bem Vindo {{ request.user.username }}<p></p></h2>
+    <p>Fez alguma alteração em suas informações pessoais? Edite para manter o cadastro atualizado.</p>
+    {% if request.user.is_staff %}
+      <p><a href="{% url 'users:self_edit_user' %}" class="btn btn-primary btn-large">Editar Informações Pessoais</a>
+      </p>
+    {% endif%}
+</header>
 {% endblock %}

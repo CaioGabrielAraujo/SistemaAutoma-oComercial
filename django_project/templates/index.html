@@ -16,6 +16,7 @@
             <div class="col-lg-12">
                 <div class="intro-message">
                     <h1>EASY SERVICE</h1>
+                    {% if user.is_authenticated %}
                     <hr class="intro-divider">
                     <ul class="list-inline intro-social-buttons">
                         <li>
@@ -28,6 +29,8 @@
                             <a href="{% url "product:listproducts"%}" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Produtos</span></a>
                         </li>
                     </ul>
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
         </div>
