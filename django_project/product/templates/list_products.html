@@ -14,14 +14,16 @@
     <th>Nome</th>
     <th>Quantidade</th>
     <th>Preço</th>
+    <th>Categoria</th>
 
   </tr>
   {% for product in all_products %}
   <tr>
 
-    <td>{{ product.nome}}</td>
-    <td>{{ product.quantidade}}</td>
+    <td>{{product.nome}}</td>
+    <td>{{product.quantidade}}</td>
     <td>{{product.precoUnidade}}</td>
+    <td>{{product.categories}}</td>
 
   </tr>
 

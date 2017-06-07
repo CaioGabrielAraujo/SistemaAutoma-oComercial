@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
 
-from product.forms import Create_Category_Form
+from product.forms import Create_Category_Form, Create_Product_Form
 from .models import Product, Category
 from django.db import models
 
@@ -24,24 +24,19 @@ def create_category(request):
 
 
 
+@staff_member_required
 def cadastrar(request):
-    if request.method == "GET":
-        return render(request, 'cadastrarProduto.html')
+    if request.method == "POST":
+        form = Create_Product_Form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('product:listproducts'))
+        return render(request, 'cadastrarProduto.html', {'form': form})
+
     else:
-        form = request.POST
-        nome = form.get('Nomedoproduto')
-        quantidade = form.get('Quantidade')
-        preco = float(form.get('Preco'))
-        categoria = form.get('Categoria')
+        form = Create_Product_Form()
+        return render(request, 'cadastrarProduto.html', {'form': form})
 
-
-
-        product = Product(nome=nome, quantidade=quantidade, precoUnidade=preco)
-        product.save()
-        product.categories = categoria
-
-
-    return render(request, 'index.html')
 
 
 def list_products(request):
