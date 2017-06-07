@@ -4,12 +4,12 @@
 
  <div class="col-md-6 col-md-offset-3">
   <div class="col-md-8 col-md-offset-2">
-    <h1>Cadastra Produto</h1>
+    <h1>Cadastra Categoria</h1>
     <br>
-  </div >
+  </div>
 
 
-  <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" style="padding-top:200px;">
+  <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{form|crispy}}
@@ -19,6 +19,17 @@
     <a class="btn btn-warning" href="{% url 'product:listproducts' %}">Cancelar</a>
   </form>
 
+  <table class="table table-hover" style="margin:5px;">
+    <tr>
+      <th>Nome</th>
+      <th>Delete</th>
+    </tr>
+    {% for category in all_categories %}
+    <tr>
+      <td>{{category.category_name}}</td>
+      </tr>
+    {% endfor %}
+  </table>
 </div>
 
 {% endblock %}
