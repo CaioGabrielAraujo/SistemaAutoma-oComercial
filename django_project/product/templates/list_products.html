@@ -24,6 +24,9 @@
     <td>{{product.quantidade}}</td>
     <td>{{product.precoUnidade}}</td>
     <td>{{product.categories}}</td>
+    <td><a class="glyphicon glyphicon-trash" onclick="return confirm('Voce tem certeza que deseja deletar ?   (Essa operação é irreversível)')" href="{% url 'product:delete_products' product.id %}"></a></td>
+<td><a class="glyphicon glyphicon-pencil" href="{% url 'product:edit_product' product.id %}"></a></td>
+
 
   </tr>
 
