@@ -13,6 +13,7 @@ class Create_Product_Form(ModelForm):
             'precoUnidade': 'Preco',
             'quantidade': 'Quantidade',
             'categories': 'Categoria',
+            'picture': 'Foto do Produto',
 
         }
 

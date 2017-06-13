@@ -17,6 +17,7 @@ class Product(models.Model):
     quantidade = models.IntegerField()
     precoUnidade = models.DecimalField(max_digits=8, decimal_places=2)
     categories = models.ManyToManyField(Category, blank=True)
+    picture = models.FileField(upload_to="product_", blank=True, null=True)
 
     def __str__(self):
         return self.nome

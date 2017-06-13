@@ -11,6 +11,7 @@
 
   <tr>
 
+    <th>Foto</th>
     <th>Nome</th>
     <th>Quantidade</th>
     <th>Preço</th>
@@ -20,6 +21,7 @@
   {% for product in all_products %}
   <tr>
 
+    <td> <img height="100" width="100" src= "{{ product.picture.url }}"></img> </td>
     <td>{{product.nome}}</td>
     <td>{{product.quantidade}}</td>
     <td>{{product.precoUnidade}}</td>

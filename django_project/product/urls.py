@@ -1,4 +1,7 @@
 from django.conf.urls import url
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 from . import views
 app_name = 'product'
@@ -10,3 +13,5 @@ urlpatterns = [
     url(r'^delete_products/(?P<product_id>[0-9]+)/', views.delete_products, name="delete_products"),
     url(r'^create_sell/', views.sell_product, name="sellproduct"),
 ]
+
+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
