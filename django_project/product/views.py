@@ -77,3 +77,9 @@ def list_products(request):
 def delete_products(request, product_id):
     Product.objects.get(id=product_id).delete()
     return HttpResponseRedirect(reverse('product:listproducts'))
+
+@staff_member_required
+def delete_category(request, product_id):
+    if request.method == "GET":
+        Category.objects.get(id=product_id).delete()
+        return HttpResponseRedirect(reverse('product:createcategory'))

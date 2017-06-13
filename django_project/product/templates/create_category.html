@@ -27,6 +27,7 @@
     {% for category in all_categories %}
     <tr>
       <td>{{category.category_name}}</td>
+        <td><a class="glyphicon glyphicon-trash" onclick="return confirm('Voce tem certeza que deseja deletar ?   (Essa operação é irreversível)')" href="{% url 'product:deletecategory' category.id %}"></a></td>
       </tr>
     {% endfor %}
   </table>
