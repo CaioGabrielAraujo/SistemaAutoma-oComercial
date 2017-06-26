@@ -24,8 +24,10 @@ class Product(models.Model):
 
 class Venda(models.Model):
     descricao = models.CharField(max_length=30, unique=True)
+    quantidade = models.IntegerField(null=True)
     produtos = models.ManyToManyField(Product, blank=True)
     date = models.DateTimeField(auto_now_add=True, null=True)
+
 
     def __str__(self):
         return self.descricao

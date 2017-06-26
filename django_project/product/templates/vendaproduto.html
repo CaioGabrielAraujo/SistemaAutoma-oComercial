@@ -29,13 +29,19 @@
     <tr>
       <th>Descricao</th>
       <th>Data de Venda</th>
+      <th>Produto</th>
+      <th>Quantidade<th>
       <th>Deletar</th>
     </tr>
     {% for venda in all_Venda %}
     <tr>
       <td>{{venda.descricao}}</td>
       <td>{{venda.date}}</td>
-        <td><a class="glyphicon glyphicon-trash" onclick="return confirm('Voce tem certeza que deseja deletar ?   (Essa operação é irreversível)')" href="{% url 'product:deletesell' venda.id %}"></a></td>
+      {% for produtos in venda.produtos.all %}
+      <td>{{produtos}}</td>
+      {%endfor%}
+      <td>{{venda.quantidade}}</td>
+      <td><a class="glyphicon glyphicon-trash" onclick="return confirm('Voce tem certeza que deseja deletar ?   (Essa operação é irreversível)')" href="{% url 'product:deletesell' venda.id %}"></a></td>
       </tr>
     {% endfor %}
   </table>
