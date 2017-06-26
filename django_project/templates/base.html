@@ -50,8 +50,8 @@
                 <a style="padding-right:50px;" class="navbar-brand topnav" href="{% url "index"%}">Home</a>
                 {% if user.is_authenticated %}
                 <a href="{% url 'users:dashboard'%}">
-                  <button type="button" class="btn btn-default navbar-btn">
-                  <span></span> Minha conta
+                  <button type="button" class="btn btn-primary navbar-btn">
+                  <span></span>{{ request.user.username }}
                 </button>
               </a>
               {% endif %}

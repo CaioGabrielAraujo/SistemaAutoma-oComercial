@@ -9,6 +9,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.admin.views.decorators import staff_member_required
+from django.db import IntegrityError
 
 @login_required
 def dashboard(request):
@@ -152,3 +154,52 @@ def self_edit_user(request):
         update_session_auth_hash(request, user)
 
         return render(request, 'users/dashboard.html')
+
+@staff_member_required
+def register(request):
+
+    if request.method == "GET":
+        return render(request, 'users/create_user.html')
+    else:
+        form = request.POST
+        first_name = form.get('first_name')
+        last_name = form.get('last_name')
+        password = form.get('password')
+        confirmPassword = form.get('confirmPassword')
+        email = form.get('email')
+        user_type = form.get('user_type')
+
+        resultCheck = fullValidationRegister(form)
+        resultCheck += fullValidation(form)
+
+        if len(resultCheck) != 0:
+            return render(
+                request,
+                'users/create_user.html',
+                {'falha': resultCheck})
+
+        try:
+            if user_type == 'common':
+                user = User.objects.create_user(first_name=first_name,
+                                                last_name=last_name,
+                                                password=password,
+                                                username=email)
+            else:
+                user = User.objects.create_superuser(first_name=first_name,
+                                                     last_name=last_name,
+                                                     password=password,
+                                                     username=email,
+                                                     email=email)
+
+        except IntegrityError as e:
+            return render(request, 'users/create_user.html',
+                          {'falha': 'Invalid email, email already exist'})
+        except:
+            return render(request, 'users/create_user.html',
+                          {'falha': 'unexpected error'})
+
+        user.save()
+        messages.success(request, 'Usuario registrado com sucesso')
+
+
+    return render(request, 'users/dashboard.html')

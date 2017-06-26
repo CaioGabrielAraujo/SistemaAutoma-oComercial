@@ -7,9 +7,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from product.forms import Create_Category_Form, Create_Product_Form, Create_Venda_Form
 from .models import Product, Category, Venda
 from django.db import models
+from django.contrib.auth.decorators import login_required
 
-
-@staff_member_required
+@login_required
 def create_category(request):
 
     if request.method == "POST":
@@ -24,7 +24,7 @@ def create_category(request):
 
 
 
-@staff_member_required
+@login_required
 def cadastrar(request):
     if request.method == "POST":
         form = Create_Product_Form(request.POST, request.FILES)
@@ -39,7 +39,7 @@ def cadastrar(request):
 
 
 
-@staff_member_required
+@login_required
 def edit_product(request,product_id):
     product = get_object_or_404(Product, pk=product_id)
     if request.method == "POST":
@@ -53,6 +53,7 @@ def edit_product(request,product_id):
         form = Create_Product_Form(instance=product)
         return render(request, 'edit_products.html', {'form': form})
 
+@login_required
 def sell_product(request):
     if request.method == "POST":
         form = Create_Venda_Form(request.POST, request.FILES)
@@ -66,19 +67,19 @@ def sell_product(request):
         return render(request, 'vendaproduto.html', {'form': form, 'all_Venda': Venda.objects.all()})
 
 
-@staff_member_required
+@login_required
 def list_products(request):
     context = {
         'all_products': Product.objects.all(),
     }
     return render(request, 'list_products.html', context)
 
-@staff_member_required
+@login_required
 def delete_products(request, product_id):
     Product.objects.get(id=product_id).delete()
     return HttpResponseRedirect(reverse('product:listproducts'))
 
-@staff_member_required
+@login_required
 def delete_category(request, product_id):
     if request.method == "GET":
         Category.objects.get(id=product_id).delete()
