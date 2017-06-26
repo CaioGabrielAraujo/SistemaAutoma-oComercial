@@ -2,11 +2,12 @@
 {% load crispy_forms_tags %}
 {% block body %}
 
- <div class="col-md-6 col-md-offset-3">
+
+<div class = "row">
   <div class="col-md-8 col-md-offset-2" style="padding-top:50px;">
-    <h1>Cadastra Venda</h1>
-    <br>
-  </div>
+    <div class="page-header">
+    <h1>Efetuar Venda</h1>
+    </div>
 
 
   <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
@@ -18,19 +19,27 @@
     <button type="submit" type="button" class="btn btn-success" onclick="return confirm('Voce tem certeza ?')">Cadastrar</button>
     <a class="btn btn-warning" href="{% url 'product:listproducts' %}">Cancelar</a>
   </form>
+  </div>
+  </div>
 
-
-  <table class="table table-hover" style="margin:5px;">
+  <div class = "row2">
+    <div class="col-md-8 col-md-offset-2">
+    </br>
+  <table class="table table-hover">
     <tr>
       <th>Descricao</th>
-      <th>Delete</th>
+      <th>Data de Venda</th>
+      <th>Deletar</th>
     </tr>
     {% for venda in all_Venda %}
     <tr>
       <td>{{venda.descricao}}</td>
+      <td>{{venda.date}}</td>
+        <td><a class="glyphicon glyphicon-trash" onclick="return confirm('Voce tem certeza que deseja deletar ?   (Essa operação é irreversível)')" href="{% url 'product:deletesell' venda.id %}"></a></td>
       </tr>
     {% endfor %}
   </table>
   </div>
+</div>
 
 {% endblock %}

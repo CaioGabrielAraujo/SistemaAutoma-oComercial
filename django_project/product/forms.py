@@ -37,6 +37,7 @@ class Create_Venda_Form(ModelForm):
         labels = {
             'descricao': 'Descricao',
             'produtos': 'Produtos',
+
         }
         widgets = {
             'produtos': forms.CheckboxSelectMultiple()

@@ -3,7 +3,7 @@
 {% block body %}
 
  <div class="col-md-6 col-md-offset-3">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-8 col-md-offset-2" style="padding-top:50px;">
     <h1>Cadastra Categoria</h1>
     <br>
   </div>
@@ -14,7 +14,7 @@
 
     {{form|crispy}}
 
-
+  </br>
     <button type="submit" type="button" class="btn btn-success" onclick="return confirm('Voce tem certeza ?')">Cadastrar</button>
     <a class="btn btn-warning" href="{% url 'product:listproducts' %}">Cancelar</a>
   </form>

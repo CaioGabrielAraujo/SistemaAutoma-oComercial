@@ -83,3 +83,10 @@ def delete_category(request, product_id):
     if request.method == "GET":
         Category.objects.get(id=product_id).delete()
         return HttpResponseRedirect(reverse('product:createcategory'))
+
+
+@staff_member_required
+def delete_sell(request, product_id):
+    if request.method == "GET":
+        Venda.objects.get(id=product_id).delete()
+        return HttpResponseRedirect(reverse('product:sellproduct'))
