@@ -203,3 +203,77 @@ def register(request):
 
 
     return render(request, 'users/dashboard.html')
+
+
+@staff_member_required
+def list_user_edit(request):
+    return __list__(request, 'users/list_user_edit.html')
+
+def __list__(request, template):
+
+    users = User.objects.all()
+
+    return render(request, template, {'users': users})
+
+def __prepare_error_render__(request, fail_message, user):
+
+    return render(request, 'userEdit/editUsers.html',
+                  {'falha': fail_message, 'user': user})
+
+
+def __prepare_error_render_self__(request, fail_message, user):
+
+    return render(request, 'users/change_password.html',
+                  {'falha': fail_message, 'user': user})
+
+
+
+def check_permissions(user):
+    context = {
+        'user': user,
+    }
+    return context
+
+@staff_member_required
+def edit_user(request, user_id):
+
+    user = User.objects.get(id=user_id)
+
+    if request.method == "GET":
+        context = check_permissions(user)
+        return render(request, 'users/edit_user.html', context)
+
+    else:
+        form = request.POST
+        first_name = form.get('first_name')
+        last_name = form.get('last_name')
+        email = form.get('email')
+        user_type = form.get('user_type')
+        resultCheck = fullValidation(form)
+
+        if len(resultCheck) != 0:
+            return __prepare_error_render__(request, resultCheck, user)
+
+        user.first_name = first_name
+        user.last_name = last_name
+        user.username = email
+        user.email = email
+
+        if user_type == 'common':
+            user.is_superuser = False
+        else:
+            user.is_staff = True
+
+
+        context = check_permissions(user)
+        user.save()
+        context['info'] = 'usuario modificado com sucesso'
+
+        return render(request, 'users/edit_user.html', context)
+
+
+def __list__(request, template):
+
+    users = User.objects.all()
+
+    return render(request, template, {'users': users})
