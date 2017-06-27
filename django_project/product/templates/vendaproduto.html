@@ -11,13 +11,17 @@
 
 
   <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+
     {% csrf_token %}
 
     {{form|crispy}}
 
 
-    <button type="submit" type="button" class="btn btn-success" onclick="return confirm('Voce tem certeza ?')">Cadastrar</button>
+
+  </br
+  ><button type="submit" type="button" class="btn btn-success" onclick="return confirm('Voce tem certeza ?')">Cadastrar</button>
     <a class="btn btn-warning" href="{% url 'product:listproducts' %}">Cancelar</a>
+      <br><h3><a class="text-danger">{{falha}}</a><h3>
   </form>
   </div>
   </div>

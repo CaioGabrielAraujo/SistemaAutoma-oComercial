@@ -58,7 +58,24 @@ def sell_product(request):
     if request.method == "POST":
         form = Create_Venda_Form(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+
+            nomeProduto = form.cleaned_data.get('produtos')
+            print nomeProduto[0]
+            quantidade = form.cleaned_data.get('quantidade')
+
+            try:
+                allProducts = Product.objects.get(nome=nomeProduto[0])
+                print allProducts
+            except Product.DoesNotExist:
+                allProducts = None
+            if quantidade > allProducts.quantidade:
+                return render(request, 'vendaproduto.html',
+                             {'form': form, 'all_Venda': Venda.objects.all(), 'falha': 'Quantidade Insuficiente no estoque'})
+            else:
+                allProducts.quantidade -= quantidade
+                allProducts.save()
+                form.save()
+
             return HttpResponseRedirect(reverse('product:sellproduct'))
         return render(request, 'vendaproduto.html', {'form': form, 'all_Venda': Venda.objects.all()})
 

@@ -41,6 +41,6 @@ class Create_Venda_Form(ModelForm):
 
         }
         widgets = {
-            'produtos': forms.CheckboxSelectMultiple(),
+            'produtos': forms.RadioSelect(),
             'quantidade': forms.NumberInput()
         }
