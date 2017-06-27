@@ -51,7 +51,7 @@
                 {% if user.is_authenticated %}
                 <a href="{% url 'users:dashboard'%}">
                   <button type="button" class="btn btn-primary navbar-btn">
-                  <span></span>{{ request.user.username }}
+                  <span class="glyphicon glyphicon-scale"></span> {{ request.user.username }}
                 </button>
               </a>
               {% endif %}

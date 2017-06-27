@@ -35,6 +35,8 @@
           <ul class="dropdown-menu forAnimate" role="menu">
             <li><a href="{% url 'users:register' %}" class="glyphicons glyphicons-plus" >Adicionar Funcionário</a></li>
             <li><a href="{% url 'users:listuseredit' %}">Modificar Funcionário</a></li>
+            <li><a href="{% url 'users:listuser' %}">Lista de Funcionários</a></li>
+
             <li><a href="#">Reportar</a></li>
 
           </ul>
@@ -55,7 +57,7 @@
 </nav>
 
 <header class="jumbotron hero-spacer" style="padding:180px;padding-left:250px;padding-top:180px">
-    <h2>Bem Vindo {{ request.user.username }}<p></p></h2>
+    <h2>Bem Vindo {{ request.user.first_name }}<p></p></h2>
     <p>Fez alguma alteração em suas informações pessoais? Edite para manter o cadastro atualizado.</p>
       {% if user.is_authenticated %}
       <p><a href="{% url 'users:self_edit_user' %}" class="btn btn-primary btn-large">Editar Informações Pessoais</a>

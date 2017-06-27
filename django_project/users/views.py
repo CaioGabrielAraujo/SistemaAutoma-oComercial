@@ -209,6 +209,10 @@ def register(request):
 def list_user_edit(request):
     return __list__(request, 'users/list_user_edit.html')
 
+@staff_member_required
+def list_user(request):
+    return __list__(request, 'users/list_user.html')
+
 def __list__(request, template):
 
     users = User.objects.all()
