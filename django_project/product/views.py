@@ -53,6 +53,7 @@ def edit_product(request,product_id):
         form = Create_Product_Form(instance=product)
         return render(request, 'edit_products.html', {'form': form})
 
+
 @login_required
 def sell_product(request):
     if request.method == "POST":
