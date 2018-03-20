@@ -4,7 +4,7 @@ python:
 env:
   - DJANGO_VERSION = 1.9.8
 install:
-  - pip3 install -r leito_hospitalar/requirements.txt
+  - pip3 install -r django_project/requirements.txt
 script:
   - nosetests
 branch:
