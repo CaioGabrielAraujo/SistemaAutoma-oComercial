@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class = "container" style="padding:10px;display:table;">
+<a class="btn btn-primary" href="{% url 'product:cadastrarProduto' %}">Adicionar Produto</a>
+<table class="table table-hover" style="margin:5px;">
+
+  <tr>
+
+    <th>Foto</th>
+    <th>Nome</th>
+    <th>Quantidade</th>
+    <th>Preço</th>
+    <th>Categoria</th>
+
+  </tr>
+  {% for product in all_products %}
+  <tr>
+
+    <td> <img height="100" width="100" src= "{{ product.picture.url }}"></img> </td>
+    <td>{{product.nome}}</td>
+    <td>{{product.quantidade}}</td>
+    <td>{{product.precoUnidade}}</td>
+
+    {% for category in product.categories.all %}
+      <td>{{category}}</td>
+    {% endfor %}
+
+    <td><a class="glyphicon glyphicon-trash" onclick="return confirm('Voce tem certeza que deseja deletar ?   (Essa operação é irreversível)')" href="{% url 'product:delete_products' product.id %}"></a></td>
+    <td><a class="glyphicon glyphicon-pencil" href="{% url 'product:edit_product' product.id %}"></a></td>
+
+
+  </tr>
+
+  {% endfor %}
+</table>
+
+</div>
+{% endblock %}
