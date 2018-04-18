@@ -1,0 +1,62 @@
+{% extends "base.html"%}
+
+{% load staticfiles %}
+
+
+{% block head %}
+<title>Login/Sign-In</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+  <link href="{% static 'users/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+
+
+{% block body%}
+  <div class="logmod">
+  <div class="logmod__wrapper">
+
+    <div class="logmod__container">
+      <ul class="logmod__tabs">
+        <li style="padding-left:180px;"data-tabtar="lgm-2"><a href="#">Login</a></li
+      </ul>
+      <div class="logmod__tab lgm-2">
+        <div class="logmod__heading">
+          <span class="logmod__heading-subtitle">Insira o email e a senha <strong>para logar</strong></span>
+        </div>
+        <div class="logmod__form">
+          <form class="form-signin" method="POST" action="{% url "users:login"%}">
+            {% csrf_token %}
+            <div class="sminputs">
+              <div class="input full">
+                <label class="string optional" for="user-name">Email*</label>
+                <input class="string optional" name="username" maxlength="255" id="user-email" placeholder="Email" type="email" size="50" />
+              </div>
+            </div>
+            <div class="sminputs">
+              <div class="input full">
+                <label class="string optional" for="user-pw">Password *</label>
+                <input class="string optional" name="password" maxlength="255" id="user-pw" placeholder="Password" type="password" size="50" />
+                						<span class="hide-password">Show</span>
+              </div>
+            </div>
+            <div class="simform__actions">
+              <button class="btn btn-info btn-primary btn-block" type="submit">Entrar</button>
+              <span class="simform__actions-sidetext"><a class="special" role="link" href="#">Forgot your password?<br></a></span>
+            </div>
+          </form>
+        </div>
+
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="{%static 'users/js/index.js' %}"></script>
+
+{% endblock %}
+</html>

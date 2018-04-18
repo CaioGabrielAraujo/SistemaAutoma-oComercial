@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+
+
+<div class = "row">
+  <div class="col-md-8 col-md-offset-1" style="padding-top:50px;">
+    <div class="page-header">
+    <h1>Cadastra Produto</h1>
+    </div>
+
+
+  <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form|crispy}}
+    </br>
+    <button type="submit" type="button" class="btn btn-success" onclick="return confirm('Voce tem certeza ?')">Cadastrar</button>
+    <a class="btn btn-warning" href="{% url 'product:listproducts' %}">Cancelar</a>
+  </form>
+</div>
+</div>
+
+{% endblock %}
